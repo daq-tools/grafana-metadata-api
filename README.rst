@@ -75,7 +75,7 @@ Add file
 ========
 Just drop some ``.json`` files into ``/var/lib/grafana-metadata-api``::
 
-    $ cat /var/lib/grafana-metadata-api/luftdaten-stations.json
+    $ cat /var/lib/grafana-metadata-api/luftdaten-stations-grafana.json
     [
         {"value": 8119, "text": "Karlsbader Stra\u00dfe, B\u00fcchenbach, Bayern, DE"},
         {"value": 1234, "text": "Hauptstra\u00dfe, Wolfratshausen, Bayern, DE"}
@@ -91,10 +91,10 @@ The files dropped into ``/var/lib/grafana-metadata-api`` will be
 offered through a HTTP API::
 
     # GET request with filename in URI
-    http https://weather.hiveeyes.org/metadata/luftdaten-stations.json
+    http https://weather.hiveeyes.org/metadata/luftdaten-stations-grafana.json
 
     # POST with filename as target
-    echo '{"target": "luftdaten-stations.json"}' | http POST https://weather.hiveeyes.org/metadata/search
+    echo '{"target": "luftdaten-stations-grafana.json"}' | http POST https://weather.hiveeyes.org/metadata/search
 
     # POST with query expression as target (using custom routes)
     echo '{"target": "SELECT * FROM luftdaten_stations"}' | http POST https://weather.hiveeyes.org/metadata/search
@@ -135,7 +135,7 @@ Add a new data source to your Grafana dashboard::
 
     Data source:    environmental-metadata
     Refresh:        On Dashboard Load
-    Query:          luftdaten-stations.json
+    Query:          luftdaten-stations-grafana.json
     Sort:           Alphabetical (asc)
 
     Multi-value:    yes
