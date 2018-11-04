@@ -7,24 +7,37 @@ grafana-metadata-api
 About
 *****
 
-The `Simple JSON Datasource`_ plugin is a generic backend datasource
-plugin serving the purpose of a hackable datasource implementation.
+The `Simple JSON Datasource`_ plugin is a backend datasource
+that sends generic HTTP requests to a given URL.
 
-The goal is to map Grafana template variable values to display text
-using the `Simple JSON Datasource`_ plugin.
+The goal is to map Grafana template variable values to display
+text using the `Simple JSON Datasource`_ plugin.
 
-This is the server-side component of the Grafana Metadata API.
-It just delivers json files after applying some basic routing, really.
+This is the server-side component of the Grafana Metadata API,
+serving as a hackable datasource implementation.
 
-See also `Map Grafana template variable identifiers to text labels using HTTP calls <https://community.hiveeyes.org/t/1189>`_.
+Being in its infancy, it just delivers static JSON files after
+applying some basic routing.
+
+See also `Map Grafana template variable identifiers to text labels using HTTP requests <https://community.hiveeyes.org/t/1189>`_.
 
 
 *****
 Setup
 *****
 
+See also `Setup grafana-metadata-api <https://community.hiveeyes.org/t/1189/3>`_.
+
+
 Backend
 =======
+
+Prerequisities
+--------------
+::
+
+    apt install nginx-extras lua-cjson git
+
 
 Source code
 -----------
@@ -60,7 +73,7 @@ General usage
 
 Add file
 ========
-- Just drop some ``.json`` files into ``/var/lib/grafana-metadata-api``::
+Just drop some ``.json`` files into ``/var/lib/grafana-metadata-api``::
 
     $ cat /var/lib/grafana-metadata-api/luftdaten-stations.json
     [
@@ -68,16 +81,23 @@ Add file
         {"value": 1234, "text": "Hauptstra\u00dfe, Wolfratshausen, Bayern, DE"}
     ]
 
+Grafana will use the ``text`` property as a the template variable's label,
+and the ``value`` property as the raw value of the template variable.
+
+
 HTTP API
 ========
-::
+The files dropped into ``/var/lib/grafana-metadata-api`` will be
+offered through a HTTP API::
 
-    # Will always work
+    # GET request with filename in URI
+    http https://weather.hiveeyes.org/metadata/luftdaten-stations.json
+
+    # POST with filename as target
     echo '{"target": "luftdaten-stations.json"}' | http POST https://weather.hiveeyes.org/metadata/search
 
-    # Will work with custom routes
+    # POST with query expression as target (using custom routes)
     echo '{"target": "SELECT * FROM luftdaten_stations"}' | http POST https://weather.hiveeyes.org/metadata/search
-
 
 
 ******************
