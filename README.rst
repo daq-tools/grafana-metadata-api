@@ -1,18 +1,22 @@
-###########################
-grafana-metadata-api README
-###########################
+####################
+grafana-metadata-api
+####################
+
 
 *****
 About
 *****
 
-Map Grafana template variable value to display text
-using the Simple JSON Datasource plugin.
+The `Simple JSON Datasource`_ plugin is a generic backend datasource
+plugin serving the purpose of a hackable datasource implementation.
 
-This just delivers json files after applying
-some basic routing, really.
+The goal is to map Grafana template variable values to display text
+using the `Simple JSON Datasource`_ plugin.
 
-See also https://community.hiveeyes.org/t/1189
+This is the server-side component of the Grafana Metadata API.
+It just delivers json files after applying some basic routing, really.
+
+See also `Map Grafana template variable identifiers to text labels using HTTP calls <https://community.hiveeyes.org/t/1189>`_.
 
 
 *****
@@ -88,3 +92,7 @@ Todo.
 Grafana variable
 ================
 Todo.
+
+
+
+.. _Simple JSON Datasource: https://github.com/bergquist/fake-simple-json-datasource
