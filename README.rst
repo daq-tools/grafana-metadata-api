@@ -54,10 +54,9 @@ Nginx virtual host section
     }
 
 
-
-*****
-Usage
-*****
+*************
+General usage
+*************
 
 Add file
 ========
@@ -69,7 +68,7 @@ Add file
         {"value": 1234, "text": "Hauptstra\u00dfe, Wolfratshausen, Bayern, DE"}
     ]
 
-Synopsis
+HTTP API
 ========
 ::
 
@@ -81,18 +80,48 @@ Synopsis
 
 
 
+******************
+Usage from Grafana
+******************
+
+Grafana plugin
+==============
+Please install the plugin `Simple JSON Datasource`_ - a generic backend datasource
+into your Grafana instance::
+
+    grafana-cli plugins install grafana-simple-json-datasource
+    systemctl restart grafana-server
+
+
 Grafana datasource
 ==================
-Todo.
+Add a new data source to your Grafana instance::
 
-- https://github.com/grafana/simple-json-datasource
-- https://community.hiveeyes.org/t/1189
+    Name:   environmental-metadata
+    Type:   SimpleJson
+    URL:    https://weather.hiveeyes.org/metadata
+    Access: proxy
+
+See also https://community.hiveeyes.org/t/1189.
 
 
 Grafana variable
 ================
-Todo.
+Add a new data source to your Grafana dashboard::
+
+    Name:           location_id
+    Label:          Location
+    Type:           Query
+
+    Data source:    environmental-metadata
+    Refresh:        On Dashboard Load
+    Query:          luftdaten-stations.json
+    Sort:           Alphabetical (asc)
+
+    Multi-value:    yes
+
+See also https://community.hiveeyes.org/t/1189.
 
 
-
-.. _Simple JSON Datasource: https://github.com/bergquist/fake-simple-json-datasource
+.. _Simple JSON Datasource: https://grafana.com/plugins/grafana-simple-json-datasource
+.. _simple-json-datasource: https://github.com/grafana/simple-json-datasource
