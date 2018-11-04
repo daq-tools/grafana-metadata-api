@@ -122,7 +122,7 @@ Add a new data source to your Grafana instance::
     URL:    https://weather.hiveeyes.org/metadata
     Access: proxy
 
-See also https://community.hiveeyes.org/t/1189.
+See also https://community.hiveeyes.org/t/1189/3.
 
 
 Grafana variable
@@ -140,7 +140,7 @@ Add a new data source to your Grafana dashboard::
 
     Multi-value:    yes
 
-See also https://community.hiveeyes.org/t/1189.
+See also https://community.hiveeyes.org/t/1189/4.
 
 
 .. _Simple JSON Datasource: https://grafana.com/plugins/grafana-simple-json-datasource
